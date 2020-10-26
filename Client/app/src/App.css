@@ -1,0 +1,63 @@
+body{
+    background-color: #41444b;
+}
+
+.bg-dark{
+    background-color: #222831 !important;
+}
+
+html,body {
+    height: 44vh;
+    max-height: 100vh;
+}
+
+/* Cards */
+
+@media (min-width: 576px) {
+  .card-columns {
+      column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+      column-count: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+      column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+      column-count: 5;
+  }
+}
+
+.row{
+  padding: 0 8px;
+}
+
+.card{
+  margin: 8px 0;
+  background-color: #ffdf7d;
+}
+
+.card-title{
+  text-decoration: ;
+}
+
+.card-body{
+  padding: 0 16px;
+}
+
+
+
+
+
+
+
+
