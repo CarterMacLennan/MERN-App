@@ -64,9 +64,11 @@ textarea{
   border: 0;
   width: 90%;
   outline: none;
-
 }
 
+button{
+  margin: 0px 8px;
+}
 
 
 
