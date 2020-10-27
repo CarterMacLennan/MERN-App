@@ -54,6 +54,18 @@ html,body {
   padding: 0 16px;
 }
 
+textarea{  
+  background-color: #ffdf7d;
+  display: block;
+  overflow: hidden;
+  resize: none;
+  padding: 0px 10px;
+  margin: 10px auto;
+  border: 0;
+  width: 90%;
+  outline: none;
+
+}
 
 
 
