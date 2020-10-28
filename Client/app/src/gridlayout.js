@@ -8,7 +8,7 @@ export default function GridLayout(){
     return (
         <div className="container-fluid">
             <div className=" card-columns">
-                {CardInfo.map(projects => <div ><Card project={projects} /></div>)}
+                {CardInfo.map((projects,index) => <div ><Card project={projects} index = {index} /></div>)}
             </div>
         </div>
         
