@@ -14,8 +14,8 @@ export default class Card extends React.Component {
 
     handleDelete() {
         console.log(this.state.note._id);
-        axios.delete("/notes/" + this.state.note._id).then( () => {
-            this.props.refresh();
+        axios.delete("/notes/delete/" + this.state.note._id).then( () => {
+            this.props.get();
         });
     }
 

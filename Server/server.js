@@ -12,7 +12,6 @@ mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .catch(err => console.log(err));
 
 const noteSchema = new mongoose.Schema({
-    id : Number,
     title: String,
     body: String,
 });
@@ -23,10 +22,19 @@ app.get("/notes", (req,res) => {
     Note.find().then( note => res.json(note));
 });
 
-app.delete("/notes/:id", (req, res) => {
+app.post("/notes/create/", (req, res) => {
+    const newNote = new Note({
+        title: "",
+        body: "",
+    });
+
+    newNote.save().then(note => res.json(note));
+});
+
+app.delete("/notes/delete/:id", (req, res) => {
     Note.findByIdAndDelete(req.params.id)
     .then(() => res.json({ remove: true}))
-})
+});
 
 app.listen(5000, ()=>{
     console.log("Server is running...");
