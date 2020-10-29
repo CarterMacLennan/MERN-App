@@ -35,6 +35,7 @@ app.put("/notes/update/:id", (req, res) => {
     Note.findById(req.params.id)
     .then( note => {
         note.title = req.body.title;
+        note.body = req.body.body;
         note.save();
     });
 });
