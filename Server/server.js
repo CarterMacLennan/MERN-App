@@ -1,3 +1,4 @@
+//npm run server
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -10,18 +11,23 @@ mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .then(console.log("Connected to Mongodb..."))
     .catch(err => console.log(err));
 
-const todoSchema = new mongoose.Schema({
+const noteSchema = new mongoose.Schema({
+    id : Number,
     title: String,
-    checked:{
-        type: Boolean,
-        default: false
-    }
+    body: String,
 });
 
-const todo = mongoose.model('todo',todoSchema);
+const Note = mongoose.model('note', noteSchema);
 
-app.get("/todos", (req,res) => {
-    todo.find().then(todo => res.json(todo))
+const defaultNote = new Note({
+    title: "Note 1",
+    body: "Test 1"
+  });
+
+defaultNote.save();
+
+app.get("/notes", (req,res) => {
+    Note.find().then( note => res.json(note));
 });
 
 app.listen(5000, ()=>{

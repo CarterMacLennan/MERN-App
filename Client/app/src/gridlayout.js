@@ -1,16 +1,35 @@
 import React from "react";
 import Card from "./card";
-import CardInfo from "./cardInfo";
+import axios from "axios";
 
-//todo make rows begin beneath the last column (Card Column)
+export default class GridLayout extends React.Component {
+    constructor(props){
+        super(props);
 
-export default function GridLayout(){
-    return (
-        <div className="container-fluid">
-            <div className=" card-columns">
-                {CardInfo.map((projects,index) => <div ><Card project={projects} index = {index} /></div>)}
+        this.state = {
+            info : null,
+        }
+    }
+
+    componentDidMount(){
+        axios.get("/notes").then( res => {
+            this.setState({info : res.data, });
+            
+            console.log(this.state.info);
+        });
+    }
+
+    render (){
+        if(this.state.info != null)
+            return (
+            <div className="container-fluid">
+                <div className=" card-columns">
+                    {(this.state.info).map((projects, index) => <div key = {index} ><Card project={projects}  /></div>)}
+                </div>
             </div>
-        </div>
-        
-    );
+            
+        );
+        else
+            return (<p>loading...</p>)
+    } 
 }

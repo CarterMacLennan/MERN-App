@@ -3,7 +3,7 @@ import './App.css';
 import Navigation from "./navigation";
 import GridLayout from "./gridlayout";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Navigation />
@@ -11,5 +11,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
