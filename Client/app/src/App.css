@@ -46,6 +46,14 @@ html,body {
   background-color: #ffdf7d;
 }
 
+.card-header{
+  padding: 4px 4px;
+}
+
+.card-title{
+  margin: 0;
+}
+
 .card-body{
   padding: 0;
 }
@@ -54,16 +62,24 @@ html,body {
   padding-right: 10px;
 }
 
-textarea{  
-  background-color: #ffdf7d;
-  display: block;
-  overflow: hidden;
-  resize: none;
-  padding: 0px 10px;
-  margin: 10px auto;
+textarea{
   border: 0;
   width: 90%;
   outline: none;
+  display: block;
+  overflow: hidden;
+  resize: none;
+}
+
+.text-area-body{  
+  background-color: #ffdf7d;
+  padding: 0px 10px;
+  margin: 10px auto;
+}
+
+.text-area-header{
+  background-color: transparent;
+  margin: auto;
 }
 
 button{
