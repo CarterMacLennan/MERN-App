@@ -19,16 +19,14 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
-const defaultNote = new Note({
-    title: "Note 1",
-    body: "Test 1"
-  });
-
-defaultNote.save();
-
 app.get("/notes", (req,res) => {
     Note.find().then( note => res.json(note));
 });
+
+app.delete("/notes/:id", (req, res) => {
+    Note.findByIdAndDelete(req.params.id)
+    .then(() => res.json({ remove: true}))
+})
 
 app.listen(5000, ()=>{
     console.log("Server is running...");

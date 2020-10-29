@@ -1,19 +1,39 @@
 import React from "react";
 import TextareaAutosize from 'react-textarea-autosize';
+import axios from "axios";
 
-export default function Card(props){
-    return (
-        <div className="card border-dark mb-3" >
-        <a className="close" href="#">×</a>
-            <div className="card-header">
-                <div className="row ">
-                    <h4 className="card-title"><strong>{props.project.title}</strong></h4>
+export default class Card extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+
+        this.state = {
+            note : this.props.note,
+        }
+    }
+
+    handleDelete() {
+        console.log(this.state.note._id);
+        axios.delete("/notes/" + this.state.note._id).then( () => {
+            this.props.refresh();
+        });
+    }
+
+    render(){
+        return (
+            <div className="card border-dark mb-3" >
+            <a className="close" href="#" onClick = {this.handleDelete}>×</a>
+                <div className="card-header">
+                    <div className="row ">
+                        <h4 className="card-title"><strong>{this.state.note.title}</strong></h4>
+                    </div>
                 </div>
-            </div>
-            
-            <div className="card-body text-dark">
-                <TextareaAutosize  defaultValue = {props.project.body}/>
-            </div>
-        </div> 
-    );
+                
+                <div className="card-body text-dark">
+                    <TextareaAutosize  defaultValue = {this.state.note.body}/>
+                </div>
+            </div> 
+        );
+    }    
+
 }
