@@ -31,6 +31,14 @@ app.post("/notes/create/", (req, res) => {
     newNote.save().then(note => res.json(note));
 });
 
+app.put("/notes/update/:id", (req, res) => {
+    Note.findById(req.params.id)
+    .then( note => {
+        note.title = req.body.title;
+        note.save();
+    });
+});
+
 app.delete("/notes/delete/:id", (req, res) => {
     Note.findByIdAndDelete(req.params.id)
     .then(() => res.json({ remove: true}))
