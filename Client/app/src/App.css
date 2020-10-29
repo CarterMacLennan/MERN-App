@@ -12,7 +12,6 @@ html,body {
 }
 
 /* Cards */
-
 @media (min-width: 576px) {
   .card-columns {
       column-count: 1;

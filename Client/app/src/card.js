@@ -6,17 +6,30 @@ export default class Card extends React.Component {
     constructor(props){
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleSave = this.handleSave.bind(this);
 
         this.state = {
-            note : this.props.note,
+            title : this.props.note.title,
+            body : this.props.note.body,
         }
     }
 
     handleDelete() {
-        console.log(this.state.note._id);
-        axios.delete("/notes/delete/" + this.state.note._id).then( () => {
+        axios.delete("/notes/delete/" + this.props.note._id).then( () => {
             this.props.get();
         });
+    }
+
+    handleSave() {
+        axios.put("/notes/update/" + this.props.note._id, {title: this.state.title, body: this.state.body});
+    }
+
+    updateTitle(e){
+        this.setState({title: e.target.value});
+    }
+
+    updateBody(e){
+        this.setState({body: e.target.value});
     }
 
     render(){
@@ -26,13 +39,13 @@ export default class Card extends React.Component {
                 <div className="card-header">
                     <div className="row ">
                         <h4 className="card-title"><strong>
-                            <TextareaAutosize  className = "text-area-header" defaultValue = {this.state.note.title}/>
+                            <TextareaAutosize  className = "text-area-header" onBlur = {this.handleSave} onChange = {(e) => this.updateTitle(e)} defaultValue = {this.state.title}/>
                         </strong></h4>
                     </div>
                 </div>
                 
                 <div className="card-body text-dark">
-                    <TextareaAutosize  className = "text-area-body" defaultValue = {this.state.note.body}/>
+                    <TextareaAutosize  className = "text-area-body" onBlur = {this.handleSave} onChange = {(e) => this.updateBody(e)} defaultValue = {this.state.body}/>
                 </div>
             </div> 
         );
