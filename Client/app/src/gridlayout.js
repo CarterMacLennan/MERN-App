@@ -10,6 +10,7 @@ export default class GridLayout extends React.Component {
 
         this.state = {
             info : null,
+            loading : false,
         }
     }
 
@@ -18,9 +19,9 @@ export default class GridLayout extends React.Component {
     }
 
     handleGet(){
-        this.setState({info : null});
+        this.setState({loading : true});
         axios.get("/notes").then( res => {
-            this.setState({info : res.data});
+            this.setState({info : res.data, loading : false});
         });
     }
     
@@ -30,28 +31,40 @@ export default class GridLayout extends React.Component {
         });
     }
 
-    render (){
+    renderNavBar(){
         const WEB_APP_NAME = "//todo";
+        return (
+            <nav className="navbar bg-dark navbar-dark">
+                <span className="navbar-brand mb-0 h1 text-warning">{WEB_APP_NAME}</span>
+                <span>
+                    <button onClick = {this.handleCreate} className="btn btn-md btn-warning" type="button"><i className="fas fa-plus "></i></button>
+                </span>
+            </nav>
+        );
+    }
 
-        if(this.state.info != null)
+    renderMainContent(){
+        if(this.state.loading !== true && this.state.info !== null){
             return (
-                <div>
-                    <nav className="navbar bg-dark navbar-dark">
-                        <span className="navbar-brand mb-0 h1 text-warning">{WEB_APP_NAME}</span>
-                        <span>
-                            <button onClick = {this.handleCreate} className="btn btn-md btn-warning" type="button"><i className="fas fa-plus "></i></button>
-                        </span>
-                    </nav>
                 <div className="container-fluid">
                     <div className=" card-columns">
                         {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} deleteItem = {this.handleGet} /></div>)}
                     </div>
                 </div>
+            );
+        } else {
+            return null
+        }
+    }
+
+    render (){
+        return (
+            <div>
+                {this.renderNavBar()}
+                {this.renderMainContent()}
             </div>
         );
-        else
-            return (<h1>loading...</h1>)
-    } 
+    }
 }
 
 
