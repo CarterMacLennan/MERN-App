@@ -15,9 +15,10 @@ export default class Card extends React.Component {
     }
 
     handleDelete() {
-        axios.delete("/notes/delete/" + this.props.note._id).then( () => {
-            this.props.get();
-        });
+        console.log("Delete request: " + this.props.note._id);
+        axios.delete("/notes/delete/" + this.props.note._id)
+        .then(() => this.props.deleteItem())                    
+          .catch(err => console.log(err))
     }
 
     handleSave() {
@@ -33,6 +34,7 @@ export default class Card extends React.Component {
     }
 
     render(){
+        console.log("Added: " + this.props.note._id);
         return (
             <div className="card border-dark mb-3" >
             <a className="close" href="#" onClick = {this.handleDelete}>×</a>

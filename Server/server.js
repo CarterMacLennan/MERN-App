@@ -42,7 +42,7 @@ app.put("/notes/update/:id", (req, res) => {
 
 app.delete("/notes/delete/:id", (req, res) => {
     Note.findByIdAndDelete(req.params.id)
-    .then(() => res.json({ remove: true}))
+    .then(data => res.json({ data}))
 });
 
 app.listen(5000, ()=>{

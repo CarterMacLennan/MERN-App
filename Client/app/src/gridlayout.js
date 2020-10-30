@@ -18,8 +18,9 @@ export default class GridLayout extends React.Component {
     }
 
     handleGet(){
+        this.setState({info : null});
         axios.get("/notes").then( res => {
-            this.setState({info : res.data, });
+            this.setState({info : res.data});
         });
     }
     
@@ -31,6 +32,7 @@ export default class GridLayout extends React.Component {
 
     render (){
         const WEB_APP_NAME = "//todo";
+
         if(this.state.info != null)
             return (
                 <div>
@@ -42,7 +44,7 @@ export default class GridLayout extends React.Component {
                     </nav>
                 <div className="container-fluid">
                     <div className=" card-columns">
-                        {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} get = {this.handleGet}/></div>)}
+                        {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} deleteItem = {this.handleGet} /></div>)}
                     </div>
                 </div>
             </div>
@@ -51,3 +53,5 @@ export default class GridLayout extends React.Component {
             return (<h1>loading...</h1>)
     } 
 }
+
+
