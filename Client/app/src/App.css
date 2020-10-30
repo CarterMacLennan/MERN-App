@@ -36,21 +36,18 @@ html,body {
   }
 }
 
-.row{
-  padding: 0 8px;
-}
-
 .card{
   margin: 8px 0;
   background-color: #ffdf7d;
 }
 
 .card-header{
-  padding: 4px 4px;
+  padding: 0 4px;
 }
 
 .card-title{
   margin: 0;
+  width: 100%;
 }
 
 .card-body{
@@ -72,17 +69,17 @@ textarea{
 
 .text-area-body{  
   background-color: #ffdf7d;
-  padding: 0px 10px;
+  padding: 0 10px;
   margin: 10px auto;
 }
 
 .text-area-header{
+  padding: 0;
   background-color: transparent;
   margin: auto;
+  width: 100%;
 }
 
 button{
   margin: 0px 8px;
 }
-
-

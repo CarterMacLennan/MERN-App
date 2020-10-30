@@ -37,13 +37,11 @@ export default class Card extends React.Component {
         console.log("Added: " + this.props.note._id);
         return (
             <div className="card border-dark mb-3" >
-            <a className="close" href="#" onClick = {this.handleDelete}>×</a>
+            <button className="close" onClick = {this.handleDelete}>×</button>
                 <div className="card-header">
-                    <div className="row ">
                         <h4 className="card-title"><strong>
                             <TextareaAutosize  className = "text-area-header" onBlur = {this.handleSave} onChange = {(e) => this.updateTitle(e)} defaultValue = {this.state.title}/>
                         </strong></h4>
-                    </div>
                 </div>
                 
                 <div className="card-body text-dark">
