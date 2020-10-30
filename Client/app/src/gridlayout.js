@@ -53,7 +53,11 @@ export default class GridLayout extends React.Component {
                 </div>
             );
         } else {
-            return null
+            return (
+                <div className = "centered">
+                    <div class="spinner-border spinner-border-xl text-warning"></div>
+                </div>
+            );
         }
     }
 
