@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import GridLayout from "./gridlayout";
+import LandingPage from "./landingPage";
 
 export default function App() {
   return (
     <div className="App">
-      <GridLayout />
+      <LandingPage />
     </div>
   );
 }

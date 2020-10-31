@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./card";
 import axios from "axios";
 
-export default class GridLayout extends React.Component {
+export default class LandingPage extends React.Component {
     constructor(props){
         super(props);
         this.handleGet = this.handleGet.bind(this);
