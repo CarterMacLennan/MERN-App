@@ -5,8 +5,6 @@ import axios from "axios";
 export default class LandingPage extends React.Component {
     constructor(props){
         super(props);
-        this.handleGet = this.handleGet.bind(this);
-        this.handleCreate = this.handleCreate.bind(this);
 
         this.state = {
             info : null,
@@ -18,14 +16,14 @@ export default class LandingPage extends React.Component {
         this.handleGet();
     }
 
-    handleGet(){
+    handleGet = () => {
         this.setState({loading : true});
         axios.get("/notes").then( res => {
             this.setState({info : res.data, loading : false});
         });
     }
     
-    handleCreate(){
+    handleCreate = () => {
         axios.post("/notes/create/").then( () => {
             this.handleGet();
         });
@@ -34,8 +32,8 @@ export default class LandingPage extends React.Component {
     renderNavBar(){
         const WEB_APP_NAME = "//todo";
         return (
-            <nav className="navbar bg-dark navbar-dark">
-                <span className="navbar-brand mb-0 h1 text-warning">{WEB_APP_NAME}</span>
+            <nav className = "navbar bg-dark navbar-dark">
+                <span className = "navbar-brand mb-0 h1 text-warning">{WEB_APP_NAME}</span>
                 <span>
                     <button onClick = {this.handleCreate} className="btn btn-md btn-warning" type="button"><i className="fas fa-plus "></i></button>
                 </span>
@@ -46,8 +44,8 @@ export default class LandingPage extends React.Component {
     renderMainContent(){
         if(this.state.loading !== true && this.state.info !== null){
             return (
-                <div className="container-fluid">
-                    <div className=" card-columns">
+                <div className = "container-fluid">
+                    <div className = "card-columns">
                         {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} deleteItem = {this.handleGet} /></div>)}
                     </div>
                 </div>
@@ -55,7 +53,7 @@ export default class LandingPage extends React.Component {
         } else {
             return (
                 <div className = "centered">
-                    <div class="spinner-border spinner-border-xl text-warning"></div>
+                    <div className = "spinner-border spinner-border-xl text-warning"></div>
                 </div>
             );
         }
