@@ -12,8 +12,14 @@ mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .catch(err => console.log(err));
 
 const noteSchema = new mongoose.Schema({
-    title: String,
-    body: String,
+    title: {
+        type: String,
+        default: "",
+    },
+    body: {
+        type: String,
+        default: ""
+    },
 });
 
 const Note = mongoose.model('note', noteSchema);
@@ -24,13 +30,9 @@ app.get("/notes", async (req,res) => {
 });
 
 app.post("/notes/create/", async (req, res) => {
-    const newNote = new Note({
-        title: "",
-        body: "",
-    });
-
-    let note = await newNote.save();
-    res.json(note);
+    const newNote = new Note;
+    let data = await newNote.save();
+    res.json(data);
 });
 
 app.put("/notes/update/:id", async (req, res) => {
