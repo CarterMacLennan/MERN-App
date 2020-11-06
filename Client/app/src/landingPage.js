@@ -18,7 +18,8 @@ export default class LandingPage extends React.Component {
 
     handleGet = async () => {
         this.setState({loading : true});
-        try{
+        
+        try {
             let res = await axios.get("/notes");
             this.setState({info : res.data, loading : false});
         } catch(err) {
@@ -26,10 +27,13 @@ export default class LandingPage extends React.Component {
         }
     }
     
-    handleCreate = () => {
-        axios.post("/notes/create/")
-        .then( () => this.handleGet())
-        .catch( err => console.log(err));
+    handleCreate = async () => {
+        try {
+            await axios.post("/notes/create/");
+            this.handleGet();
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     renderNavBar(){
@@ -49,7 +53,7 @@ export default class LandingPage extends React.Component {
             return (
                 <div className = "container-fluid">
                     <div className = "card-columns">
-                        {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} deleteItem = {this.handleGet} /></div>)}
+                        {(this.state.info).map((note, index) => <div key = {index} ><Card note={note} getItems = {this.handleGet} /></div>)}
                     </div>
                 </div>
             );
