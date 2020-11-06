@@ -25,27 +25,42 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('note', noteSchema);
 
 app.get("/notes", async (req,res) => {
-    let note = await Note.find();
-    res.json(note);
+    try {
+        let note = await Note.find();
+        res.json(note);
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 app.post("/notes/create/", async (req, res) => {
-    const newNote = new Note;
-    let data = await newNote.save();
-    res.json(data);
+    try {
+        const newNote = new Note;
+        let data = await newNote.save();
+        res.json(data);
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 app.put("/notes/update/:id", async (req, res) => {
-    let note = await Note.findById(req.params.id);
-    
-    note.title = req.body.title;
-    note.body = req.body.body;
-    note.save();
+    try {
+        let note = await Note.findById(req.params.id);
+        note.title = req.body.title;
+        note.body = req.body.body;
+        note.save();
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 app.delete("/notes/delete/:id", async (req, res) => {
-    let data = await Note.findByIdAndDelete(req.params.id);
-    res.json(data);
+    try {
+        let data = await Note.findByIdAndDelete(req.params.id);
+        res.json(data);
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 app.listen(5000, ()=>{
