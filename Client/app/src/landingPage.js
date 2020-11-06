@@ -28,7 +28,8 @@ export default class LandingPage extends React.Component {
     
     handleCreate = () => {
         axios.post("/notes/create/")
-        .then( () => { this.handleGet(); });
+        .then( () => this.handleGet())
+        .catch( err => console.log(err));
     }
 
     renderNavBar(){

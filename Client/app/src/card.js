@@ -14,11 +14,13 @@ export default class Card extends React.Component {
 
     handleDelete = () => {
         axios.delete("/notes/delete/" + this.props.note._id)
-        .then(() => this.props.deleteItem())                    
+        .then(() => this.props.deleteItem())
+        .catch(err => console.log(err));                
     }
 
     handleSave = () => {
-        axios.put("/notes/update/" + this.props.note._id, {title: this.state.title, body: this.state.body});
+        axios.put("/notes/update/" + this.props.note._id, {title: this.state.title, body: this.state.body})
+        .catch(err => console.log(err));
     }
 
     render(){
