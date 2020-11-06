@@ -16,17 +16,19 @@ export default class LandingPage extends React.Component {
         this.handleGet();
     }
 
-    handleGet = () => {
+    handleGet = async () => {
         this.setState({loading : true});
-        axios.get("/notes").then( res => {
+        try{
+            let res = await axios.get("/notes");
             this.setState({info : res.data, loading : false});
-        });
+        } catch(err) {
+            console.log(err);
+        }
     }
     
     handleCreate = () => {
-        axios.post("/notes/create/").then( () => {
-            this.handleGet();
-        });
+        axios.post("/notes/create/")
+        .then( () => { this.handleGet(); });
     }
 
     renderNavBar(){
