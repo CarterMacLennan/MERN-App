@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
 
-const db = "mongodb://localhost:27017/todo_app";
+const db = "mongodb://localhost:27017/MERN";
 
 mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .then(console.log("Connected to Mongodb..."))
