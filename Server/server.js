@@ -8,7 +8,7 @@ app.use(express.json());
 const db = "mongodb://localhost:27017/MERN";
 
 mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
-    .then(console.log("Connected to Mongodb..."))
+    .then(console.log("Connected to MongoDB..."))
     .catch(err => console.log(err));
 
 const noteSchema = new mongoose.Schema({
@@ -18,31 +18,32 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
-app.get("/notes", (req,res) => {
-    Note.find().then( note => res.json(note));
+app.get("/notes", async (req,res) => {
+    let note = await Note.find();
+    res.json(note);
 });
 
-app.post("/notes/create/", (req, res) => {
+app.post("/notes/create/", async (req, res) => {
     const newNote = new Note({
         title: "",
         body: "",
     });
 
-    newNote.save().then(note => res.json(note));
+    let note = await newNote.save();
+    res.json(note);
 });
 
-app.put("/notes/update/:id", (req, res) => {
-    Note.findById(req.params.id)
-    .then( note => {
-        note.title = req.body.title;
-        note.body = req.body.body;
-        note.save();
-    });
+app.put("/notes/update/:id", async (req, res) => {
+    let note = await Note.findById(req.params.id);
+    
+    note.title = req.body.title;
+    note.body = req.body.body;
+    note.save();
 });
 
-app.delete("/notes/delete/:id", (req, res) => {
-    Note.findByIdAndDelete(req.params.id)
-    .then(data => res.json({ data}))
+app.delete("/notes/delete/:id", async (req, res) => {
+    let data = await Note.findByIdAndDelete(req.params.id);
+    res.json(data);
 });
 
 app.listen(5000, ()=>{
