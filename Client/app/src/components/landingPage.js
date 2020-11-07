@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./card";
 import axios from "axios";
+import NavBar from "./navBar";
 
 export default class LandingPage extends React.Component {
     constructor(props){
@@ -18,34 +19,12 @@ export default class LandingPage extends React.Component {
 
     handleGet = async () => {
         this.setState({loading : true});
-        
         try {
             let res = await axios.get("/notes");
             this.setState({info : res.data, loading : false});
         } catch(err) {
             console.log(err);
         }
-    }
-    
-    handleCreate = async () => {
-        try {
-            await axios.post("/notes/create/");
-            this.handleGet();
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
-    renderNavBar(){
-        const WEB_APP_NAME = "//todo";
-        return (
-            <nav className = "navbar bg-dark navbar-dark">
-                <span className = "navbar-brand mb-0 h1 text-warning">{WEB_APP_NAME}</span>
-                <span>
-                    <button onClick = {this.handleCreate} className="btn btn-md btn-warning" type="button"><i className="fas fa-plus "></i></button>
-                </span>
-            </nav>
-        );
     }
 
     renderMainContent(){
@@ -69,7 +48,7 @@ export default class LandingPage extends React.Component {
     render (){
         return (
             <div>
-                {this.renderNavBar()}
+                <NavBar getItems = {this.handleGet} />
                 {this.renderMainContent()}
             </div>
         );
