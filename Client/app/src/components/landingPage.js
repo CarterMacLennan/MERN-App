@@ -14,7 +14,7 @@ export default class LandingPage extends React.Component {
     }
 
     componentDidMount(){
-        this.handleGet();
+        //this.handleGet();
     }
 
     handleGet = async () => {

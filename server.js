@@ -24,6 +24,13 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('/Client/app/build'));
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname + '/Client/app/build/index.html'));
+    });
+}
+
 app.get("/notes", async (req,res) => {
     try {
         let note = await Note.find();
@@ -62,13 +69,6 @@ app.delete("/notes/delete/:id", async (req, res) => {
         console.log(err);
     }
 });
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('/Client/app/build'));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname + '/Client/app/build/index.html'));
-    });
-  }
 
 app.listen(process.env.PORT || 5000, ()=>{
     console.log("Server is running...");
