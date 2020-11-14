@@ -65,7 +65,10 @@ app.delete("/notes/delete/:id", async (req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('/Client/app/build'));
-}
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname + '/Client/app/build/index.html'));
+    });
+  }
 
 app.listen(process.env.PORT || 5000, ()=>{
     console.log("Server is running...");
