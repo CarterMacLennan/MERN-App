@@ -59,12 +59,12 @@ app.delete("/notes/delete/:id", async (req, res) => {
         let data = await Note.findByIdAndDelete(req.params.id);
         res.json(data);
     } catch(err) {
-        console.log(err);
+        console.log(err);``
     }
 });
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path_join(__dirname, '../Client/app/build'))
+    app.use(express.static(path_join(__dirname, '../Client/app/build/')))
 }
 
 app.listen(process.env.PORT || 5000, ()=>{
