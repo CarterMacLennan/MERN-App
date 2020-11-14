@@ -64,7 +64,7 @@ app.delete("/notes/delete/:id", async (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(__dirname + '/Client/app/build/'));
+    app.use(express.static(__dirname + '/Client/app/build/index.html'));
 }
 
 app.listen(process.env.PORT || 5000, ()=>{
