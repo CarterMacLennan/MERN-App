@@ -10,7 +10,6 @@
     "build": "cd Client/app && npm run build",
     "install-client": "cd Client/app && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "postinstall": "ng build"
   },
   "keywords": [],
   "author": "",
