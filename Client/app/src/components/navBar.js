@@ -8,7 +8,7 @@ export default class NavBar extends React.Component {
 
     handleCreate = async () => {
         try {
-            await axios.post("/notes/create/");
+            await axios.post("https://mernnotesapplication.herokuapp.com/notes/create/");
             this.props.getItems();
         } catch(err) {
             console.log(err);

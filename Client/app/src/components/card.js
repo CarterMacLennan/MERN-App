@@ -14,7 +14,7 @@ export default class Card extends React.Component {
 
     handleDelete = async () => {
         try {
-            await axios.delete("/notes/delete/" + this.props.note._id);
+            await axios.delete("https://mernnotesapplication.herokuapp.com/notes/delete/" + this.props.note._id);
             this.props.getItems();
         } catch(err) {
             console.log(err);
@@ -22,7 +22,7 @@ export default class Card extends React.Component {
     }
 
     handleSave = () => {
-        axios.put("/notes/update/" + this.props.note._id, {title: this.state.title, body: this.state.body})
+        axios.put("https://mernnotesapplication.herokuapp.com/notes/update/" + this.props.note._id, {title: this.state.title, body: this.state.body})
         .catch( err => console.log(err));
     }
 
