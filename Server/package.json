@@ -1,18 +1,12 @@
 {
-  "name": "server",
+  "name": "Server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "engines": {
-    "node": "12.18.3"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "build": "cd Client/app && npm run build",
-    "install-client": "cd Client/app && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build"
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +15,6 @@
     "concurrently": "^5.3.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
-    "nodemon": "^2.0.5",
-    "serve": "^11.3.2"
+    "nodemon": "^2.0.5"
   }
 }

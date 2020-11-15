@@ -14,13 +14,13 @@ export default class LandingPage extends React.Component {
     }
 
     componentDidMount(){
-        //this.handleGet();
+        this.handleGet();
     }
 
     handleGet = async () => {
         this.setState({loading : true});
         try {
-            let res = await axios.get("https://mernnotesapplication.herokuapp.com/notes");
+            let res = await axios.get("/notes");
             this.setState({info : res.data, loading : false});
         } catch(err) {
             console.log(err);
