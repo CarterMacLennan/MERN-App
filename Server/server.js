@@ -24,16 +24,18 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
-app.get("/notes", async (req,res) => {
+app.route("/notes")
+
+.get(async (req,res) => {
     try {
         let note = await Note.find();
         res.json(note);
     } catch(err) {
         console.log(err);
     }
-});
+})
 
-app.post("/notes/create/", async (req, res) => {
+.post(async (req, res) => {
     try {
         const newNote = new Note;
         let data = await newNote.save();
@@ -43,18 +45,20 @@ app.post("/notes/create/", async (req, res) => {
     }
 });
 
-app.put("/notes/update/:id", async (req, res) => {
+app.route("/notes/:id")
+
+.put(async (req, res) => {
     try {
         let note = await Note.findById(req.params.id);
         note.title = req.body.title;
         note.body = req.body.body;
-        note.save();
+        await note.save();
     } catch(err) {
         console.log(err);
     }
-});
+})
 
-app.delete("/notes/delete/:id", async (req, res) => {
+.delete(async (req, res) => {
     try {
         let data = await Note.findByIdAndDelete(req.params.id);
         res.json(data);
