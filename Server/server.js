@@ -28,8 +28,7 @@ app.route("/notes")
 
 .get(async (req,res) => {
     try {
-        let note = await Note.find();
-        res.json(note);
+        res.json( await Note.find());
     } catch(err) {
         console.log(err);
     }
@@ -38,8 +37,7 @@ app.route("/notes")
 .post(async (req, res) => {
     try {
         const newNote = new Note;
-        let data = await newNote.save();
-        res.json(data);
+        res.json( await newNote.save());
     } catch(err) {
         console.log(err);
     }
@@ -52,7 +50,8 @@ app.route("/notes/:id")
         let note = await Note.findById(req.params.id);
         note.title = req.body.title;
         note.body = req.body.body;
-        await note.save();
+        
+        res.json( await note.save());
     } catch(err) {
         console.log(err);
     }
@@ -60,8 +59,7 @@ app.route("/notes/:id")
 
 .delete(async (req, res) => {
     try {
-        let data = await Note.findByIdAndDelete(req.params.id);
-        res.json(data);
+        res.json( await Note.findByIdAndDelete(req.params.id));
     } catch(err) {
         console.log(err);
     }
