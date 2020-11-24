@@ -9,6 +9,19 @@ A responsive notes application developed with the MERN software stack.
 
 ![Application Screenshot](/../main/Screenshots/ApplicationScreenshot.png?raw=true "Optional Title")
 
+### Run Locally
+1. clone the repo
+2. `cd MERN-APP/Server`
+3. `Open a terminal`
+4. Make sure you have Node.js & MongoDB installed in your system
+5. `npm install`
+6. `npm run server` to start the server. By default it will run on port 5000.
+7. Open another terminal
+8. `cd MERN-APP/Client/app`
+9. `npm install`
+10. `npm start` to run the UI, it'll open on a new tab on port 3000.
+11. To see the application, go to http://localhost:3000
+
 ### Responsive & Get Request
 By utilizing [bootstrap's grid system](https://getbootstrap.com/docs/4.0/layout/grid/), notes are able to adapt to the size of the viewport.
 
