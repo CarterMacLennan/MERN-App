@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '/../client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 mongoose.connect(process.env.DB_URI||"mongodb://localhost:27017/MERN", ({useUnifiedTopology: true, useNewUrlParser: true}))
     .then(console.log("Connected to MongoDB..."))
@@ -69,7 +69,7 @@ app.route("/notes/:id")
 });
 
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '/../client/build', "index.html"));
+    res.sendFile(path.join(__dirname, '/client/build', "index.html"));
 });
 
 app.listen(process.env.PORT || 5000, ()=>{
