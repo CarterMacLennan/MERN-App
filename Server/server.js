@@ -1,13 +1,11 @@
 const path = require('path'),
     express = require('express'),
-    favicon = require("serve-favicon"),
     mongoose = require("mongoose");
 
 const app = express();
 
 app.use(express.json());
 
-app.use(favicon(__dirname + '/client/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 mongoose.connect(process.env.DB_URI, ({useUnifiedTopology: true, useNewUrlParser: true}))
