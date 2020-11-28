@@ -1,13 +1,16 @@
-//npm run server
-const express = require("express");
-const mongoose = require("mongoose");
+const path = require('path'),
+    express = require('express'),
+    favicon = require("serve-favicon"),
+    mongoose = require("mongoose");
 
 const app = express();
+
 app.use(express.json());
 
-const db = "mongodb://localhost:27017/MERN";
+app.use(favicon(__dirname + '/client/public/favicon.ico'));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
-mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
+mongoose.connect(process.env.DB_URI, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .then(console.log("Connected to MongoDB..."))
     .catch(err => console.log(err));
 
@@ -59,12 +62,18 @@ app.route("/notes/:id")
 
 .delete(async (req, res) => {
     try {
-        res.json( await Note.findByIdAndDelete(req.params.id));
+        await Note.findByIdAndDelete(req.params.id);
+        req.method = 'GET';
+        res.redirect(200, '/notes');
     } catch(err) {
-        console.log(err);
+        console.log(data);
     }
 });
 
-app.listen(5000, ()=>{
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '/client/build', "index.html"));
+});
+
+app.listen(process.env.PORT || 5000, ()=>{
     console.log("Server is running...");
 });
