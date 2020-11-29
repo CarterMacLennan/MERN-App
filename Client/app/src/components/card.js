@@ -12,19 +12,17 @@ export default class Card extends React.Component {
         }
     }
 
-    handleDelete = () => {
+    handleDelete = async () => {
         try {
-            axios.delete("/notes/" + this.props.note._id);
+            await axios.delete("/notes/" + this.props.note._id);
+            this.props.getItems();
         } catch(err) {
             console.log(err);
         }
     }
 
     handleSave = () => {
-        axios.put("/notes/" + this.props.note._id, {
-            title: this.state.title,
-            body: this.state.body
-        })
+        axios.put("/notes/" + this.props.note._id, {title: this.state.title, body: this.state.body})
         .catch( err => console.log(err));
     }
 

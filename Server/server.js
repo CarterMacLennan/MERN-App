@@ -1,14 +1,13 @@
-const path = require('path'),
-    express = require('express'),
-    mongoose = require("mongoose");
+//npm run server
+const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
-
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '/client/build')));
+const db = "mongodb://localhost:27017/MERN";
 
-mongoose.connect(process.env.DB_URI||"mongodb://localhost:27017/MERN", ({useUnifiedTopology: true, useNewUrlParser: true}))
+mongoose.connect(db, ({useUnifiedTopology: true, useNewUrlParser: true}))
     .then(console.log("Connected to MongoDB..."))
     .catch(err => console.log(err));
 
@@ -25,15 +24,17 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('note', noteSchema);
 
-app.get("/notes", async (req,res) => {
+app.route("/notes")
+
+.get(async (req,res) => {
     try {
         res.json( await Note.find());
     } catch(err) {
         console.log(err);
     }
-});
+})
 
-app.post("/notes", async (req, res) => {
+.post(async (req, res) => {
     try {
         const newNote = new Note;
         res.json( await newNote.save());
@@ -42,7 +43,9 @@ app.post("/notes", async (req, res) => {
     }
 });
 
-app.put("/notes/:id", async (req, res) => {
+app.route("/notes/:id")
+
+.put(async (req, res) => {
     try {
         let note = await Note.findById(req.params.id);
         note.title = req.body.title;
@@ -52,22 +55,16 @@ app.put("/notes/:id", async (req, res) => {
     } catch(err) {
         console.log(err);
     }
-});
+})
 
-app.delete("/notes/:id", async (req, res) => {
+.delete(async (req, res) => {
     try {
-        await Note.findByIdAndDelete(req.params.id);
-        req.method = 'GET';
-        res.redirect(200, '/notes');
+        res.json( await Note.findByIdAndDelete(req.params.id));
     } catch(err) {
-        console.log(data);
+        console.log(err);
     }
 });
 
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '/client/build', "index.html"));
-});
-
-app.listen(process.env.PORT || 5000, ()=>{
+app.listen(5000, ()=>{
     console.log("Server is running...");
 });
